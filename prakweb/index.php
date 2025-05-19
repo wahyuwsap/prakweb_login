@@ -1,8 +1,10 @@
 <?php
 session_start();
-if (isset($_SESSION['status']) && $_SESSION['status'] == "login") {
-    header("location:home.php");
-    exit;
+
+// Redirect ke home jika sudah login
+if (isset($_SESSION['status']) && $_SESSION['status'] === "login") {
+    header("Location: home.php");
+    exit();
 }
 ?>
 
@@ -13,9 +15,9 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == "login") {
 </head>
 <body>
 
-<h2>Halaman Login</h2>
+<h2>Login</h2>
 
-<!-- Tampilkan pesan error di sini -->
+<!-- Tampilkan pesan error -->
 <?php
 if (isset($_SESSION['error'])) {
     echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
@@ -23,9 +25,13 @@ if (isset($_SESSION['error'])) {
 }
 ?>
 
-<form action="process_login.php" method="post">
-    Username: <input type="text" name="username" required><br>
-    Password: <input type="password" name="password" required><br>
+<form method="POST" action="process_login.php">
+    <label>Username:</label><br>
+    <input type="text" name="username" required><br>
+
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+
     <input type="submit" value="Login">
 </form>
 
